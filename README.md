@@ -32,18 +32,18 @@ Siga as instruções abaixo para configurar e executar o projeto FinSharp em seu
 
 1. **Pré-requisitos**: Certifique-se de ter instalado em sua máquina o seguinte:
 
-   - [.NET SDK](https://dotnet.microsoft.com/download) (versão X.X.X ou superior)
+   - [.NET SDK](https://dotnet.microsoft.com/download) (versão 7.0.304 ou superior)
    - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (instalação local ou em um servidor)
 
 2. **Clonar o repositório**: Clone este repositório em seu ambiente local utilizando o seguinte comando:
 
    ```shell
-   git clone https://github.com/seu-usuario/finsharp.git
+   git clone https://github.com/encodedbrain/finsharp.git
    ```
 
 3. **Configurar o
 
- banco de dados**: Utilize o SQL Server Management Studio ou outra ferramenta de administração do SQL Server para criar um banco de dados vazio chamado "FinSharpDB".
+ banco de dados**: Utilize o SQL Server Management Studio ou outra ferramenta de administração do SQL Server para criar um banco de dados vazio chamado "FinSharp".
 
 4. **Configurar a conexão com o banco de dados**: Abra o arquivo `appsettings.json` localizado na raiz do projeto e atualize as informações de conexão com o banco de dados, como o nome do servidor, nome do banco de dados, usuário e senha.
 
@@ -55,6 +55,36 @@ Siga as instruções abaixo para configurar e executar o projeto FinSharp em seu
      ...
    }
    ```
+
+
+Para configurar a connection string do banco de dados com o Entity Framework usando o método `OnConfiguring` do seu DbContext, siga as etapas abaixo:
+
+1. Abra o arquivo que contém a classe do seu DbContext.
+
+2. Dentro da classe do seu DbContext, localize o método `OnConfiguring`.
+
+3. No método `OnConfiguring`, adicione o seguinte código para configurar a connection string:
+
+   ```csharp
+   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   {
+       if (!optionsBuilder.IsConfigured)
+       {
+           string connectionString = "Server=nome-do-servidor;Database=nome-do-banco;User Id=usuario;Password=senha;";
+           optionsBuilder.UseSqlServer(connectionString);
+       }
+   }
+   ```
+
+   Certifique-se de substituir `"nome-do-servidor"`, `"nome-do-banco"`, `"usuario"` e `"senha"` pelos valores corretos da sua configuração do SQL Server.
+
+   Observe que o trecho `if (!optionsBuilder.IsConfigured)` é usado para garantir que a configuração só seja aplicada se o DbContext ainda não estiver configurado.
+
+
+Agora, o Entity Framework utilizará a connection string configurada no método `OnConfiguring` para estabelecer a conexão com o banco de dados ao executar as operações de leitura e gravação.
+
+Certifique-se de proteger suas informações confidenciais, como senhas e credenciais de acesso ao banco de dados, utilizando práticas adequadas de segurança.
+
 
 5. **Executar as migrações do Entity Framework**: No terminal, navegue até a pasta raiz do projeto e execute o seguinte comando:
 
