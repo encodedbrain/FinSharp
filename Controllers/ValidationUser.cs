@@ -10,7 +10,7 @@ namespace FinSharp.Controllers
     {
         [HttpPost]
         [Route("user/profile/validations/data")]
-        public IActionResult ValidationData(
+        public async Task<IActionResult> ValidationData(
             [FromServices] LocalDb Db,
             [FromBody]
             CPF data
@@ -18,19 +18,31 @@ namespace FinSharp.Controllers
         {
             UserData NewUserData = new UserData();
 
-            var Email = NewUserData.VaLidateEmail(data.Email);
-            var Password = NewUserData.ValidatePassword(data.Password);
+            var IsCpf = NewUserData.ValidateCpf(data.Cpf);
+            var IsEmail = NewUserData.VaLidateEmail(data.Email);
+            var IsPassword = NewUserData.ValidatePassword(data.Password);
+
             var Phone = NewUserData.ValidatePhone(data.Phone);
-            var Cpf = NewUserData.ValidateCpf(data.Cpf);
+            var CpfFormated = NewUserData.ReturnCpfFormated(IsCpf, data.Cpf);
+            var ReturnEmail = NewUserData.ReturnEmail(IsEmail, data.Email);
+            var EncodedPwd = NewUserData.EncryptingPassword(IsPassword, data.Password);
 
             try
             {
-                if (Cpf != true)
+                if (IsCpf != true || IsEmail != true)
                 {
-                    return BadRequest();
+
+                    return BadRequest("to something wrong!");
                 }
 
-                return Ok(true);
+                var result = new UserData(ReturnEmail, "Password", Phone, CpfFormated);
+
+
+                await Db.UserDatas.AddAsync(result);
+
+                await Db.SaveChangesAsync();
+
+                return Ok(result);
 
             }
             catch (Exception ex)
