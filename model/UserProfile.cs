@@ -28,7 +28,12 @@ namespace FinSharp.model
             return true;
         }
 
-        public bool ValidateAge(string age)
+        public bool ValidateAge(int age)
+        {
+            return true;
+        }
+
+        public bool ValidatePhoto(string photo)
         {
             return true;
         }
