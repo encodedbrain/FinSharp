@@ -32,7 +32,7 @@ Siga as instruções abaixo para configurar e executar o projeto FinSharp em seu
 
 1. **Pré-requisitos**: Certifique-se de ter instalado em sua máquina o seguinte:
 
-   - [.NET SDK](https://dotnet.microsoft.com/download) (versão X.X.X ou superior)
+   - [.NET SDK](https://dotnet.microsoft.com/download) (versão 7.0.304 ou superior)
    - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (instalação local ou em um servidor)
 
 2. **Clonar o repositório**: Clone este repositório em seu ambiente local utilizando o seguinte comando:
