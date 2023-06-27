@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace FinSharp.model
@@ -29,9 +28,9 @@ namespace FinSharp.model
 
         public bool ValidateCpf(string? cpf)
         {
-            string RegularExpression = "^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}";
+            string Pattern = "^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}";
 
-            Regex rgx = new Regex(RegularExpression);
+            Regex rgx = new Regex(Pattern);
 
             List<int> CpfDigits = new List<int>();
             List<int> NineDigitMultiplication = new List<int>();
@@ -39,6 +38,7 @@ namespace FinSharp.model
 
             if (string.IsNullOrEmpty(cpf))
             {
+
                 return false;
             }
             else
@@ -152,19 +152,59 @@ namespace FinSharp.model
                 }
                 else
                 {
+
+
                     return false;
                 }
             }
         }
 
-        public string VaLidateEmail(string email)
+
+        public string ReturnCpfFormated(bool CpfIsValid, string? cpf)
         {
-            return email;
+
+            if (!CpfIsValid)
+            {
+                return "";
+            }
+            string CpfFormated = Regex.Replace(cpf, "[^0-9a-zA-Z]+", "");
+
+            return CpfFormated;
+
+        }
+        public bool VaLidateEmail(string email)
+        {
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
+            string Pattern = "^\\S+@\\S+\\.\\S+$";
+            Regex rgx = new Regex(Pattern);
+
+
+            return rgx.IsMatch(email);
+
         }
 
-        public string ValidatePassword(string password)
+        public string ReturnEmail(bool EmailIsvalid, string email)
         {
-            return password;
+            if (EmailIsvalid != true)
+            {
+                return $"{EmailIsvalid}";
+            }
+            return email;
+        }
+        public bool ValidatePassword(string password)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$";
+            return Regex.IsMatch(password, pattern);
+
+        }
+
+        public bool EncryptingPassword(bool IsPassword, string? password)
+        {
+            return true;
         }
 
         public string ValidatePhone(string phone)
