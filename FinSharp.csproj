@@ -20,4 +20,24 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="bastata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="bastata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bastata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="bastata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="services\" />
+  </ItemGroup>
+
 </Project>

@@ -23,7 +23,7 @@ namespace FinSharp.model
         public string? Photo { get; private set; }
 
         //region Methods
-        public bool ValidateNickname(string nickname)
+        public bool ValidateNickname(string? nickname)
         {
             return true;
         }
@@ -33,7 +33,7 @@ namespace FinSharp.model
             return true;
         }
 
-        public bool ValidatePhoto(string photo)
+        public bool ValidatePhoto(string? photo)
         {
             return true;
         }
