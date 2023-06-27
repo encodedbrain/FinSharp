@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 *.Development.json
+.idea/
 
 # Build results
 
