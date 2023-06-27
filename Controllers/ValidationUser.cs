@@ -12,26 +12,26 @@ namespace FinSharp.Controllers
         [Route("user/profile/validations/data")]
         public IActionResult ValidationData(
             [FromServices] LocalDb Db,
-            [FromBody] string password,
-            string email,
-            string phone,
-            string cpf
+            [FromBody]
+            CPF data
         )
         {
             UserData NewUserData = new UserData();
 
-            var Email = NewUserData.VaLidateEmail(email);
-            var Password = NewUserData.ValidatePassword(password);
-            var Phone = NewUserData.ValidatePhone(phone);
-            var Cpf = NewUserData.ValidateCpf(cpf);
-            if (Cpf != true)
-            {
-                return BadRequest("Invalid data");
-            }
+            var Email = NewUserData.VaLidateEmail(data.Email);
+            var Password = NewUserData.ValidatePassword(data.Password);
+            var Phone = NewUserData.ValidatePhone(data.Phone);
+            var Cpf = NewUserData.ValidateCpf(data.Cpf);
 
             try
             {
-                return Ok("data validated successfully");
+                if (Cpf != true)
+                {
+                    return BadRequest();
+                }
+
+                return Ok(true);
+
             }
             catch (Exception ex)
             {
@@ -43,17 +43,15 @@ namespace FinSharp.Controllers
         [Route("user/profile/validations/profile")]
         public IActionResult ValidationProfile(
             [FromServices] LocalDb Db,
-            [FromBody] string nickname,
-            string age
+            [FromBody] Profile profile
         )
         {
             UserProfile NewUserProfile = new UserProfile();
 
-            NewUserProfile.ValidateNickname(nickname);
-            NewUserProfile.ValidateAge(age);
+            NewUserProfile.ValidateNickname(profile.Nickname);
+            NewUserProfile.ValidateAge(profile.Age);
+            NewUserProfile.ValidatePhoto(profile.Photo);
 
-
-            
             return Ok();
         }
     }
