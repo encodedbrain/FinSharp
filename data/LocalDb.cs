@@ -5,8 +5,11 @@ namespace FinSharp.data
 {
     public class LocalDb : DbContext
     {
-        public DbSet<UserProfile> Profiles { get; set; } = null!;
-        public DbSet<UserData> UserDatas { get; set; } = null!;
+        public LocalDb(DbContextOptions<LocalDb> options) : base(options)
+        {
+        }
+        public DbSet<User> Users { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,10 +22,5 @@ namespace FinSharp.data
             base.OnConfiguring(optionsBuilder);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserProfile>().ToTable("Users");
-            modelBuilder.Entity<UserData>().ToTable("UsersData");
-        }
     }
 }
