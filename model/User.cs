@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -31,17 +30,15 @@ namespace FinSharp.model
         {
             Id = new Guid();
 
-            var date = DateTime.Now;
-            var culture = date.ToString(CultureInfo.CreateSpecificCulture("pt-BR"));
-            CreateAt = DateTime.Parse(culture);
+            DateTime date = DateTime.Now;
+            CreateAt = date.ToString("dd/MM/yyyy");
         }
-
 
         [Display(Name = "Id")][Column("Id")] public Guid Id { get; private set; }
 
         [Display(Name = "Name")]
         [Column("Name")]
-        public string? Name { get; private set; }
+        public string? Name { get; internal set; }
 
         [Display(Name = "Age")]
         [Column("Age")]
@@ -49,7 +46,7 @@ namespace FinSharp.model
 
         [Display(Name = "Email")]
         [Column("Email")]
-        public string? Email { get; private set; }
+        public string? Email { get; internal set; }
 
         [Display(Name = "Password")]
         [Column("Password")]
@@ -65,12 +62,12 @@ namespace FinSharp.model
 
         [Display(Name = "CreateAt")]
         [Column("CreateAt")]
-        public DateTime CreateAt { get; private set; }
+        public string? CreateAt { get; private set; } = DateTime.Now.ToString("dd/MM/yyyy");
 
 
         public bool ValidateCpf(string? cpf)
         {
-           
+
             string pattern = "^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}";
 
             Regex rgx = new Regex(pattern);
@@ -191,7 +188,7 @@ namespace FinSharp.model
 
         public string ReturnCpfFormated(string? cpf)
         {
- 
+
             if (!ValidateCpf(cpf))
             {
                 return "";
@@ -204,7 +201,7 @@ namespace FinSharp.model
 
         public bool VaLidateEmail(string? email)
         {
-          
+
 
             if (string.IsNullOrEmpty(email))
             {
@@ -240,7 +237,7 @@ namespace FinSharp.model
 
         public bool ValidateName(string? name)
         {
-        
+
             if (name.Length > 10) return false;
             return true;
         }
