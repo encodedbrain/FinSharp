@@ -27,7 +27,7 @@ public class TokenServices
                         new Claim(ClaimTypes.Name, users.Name),
                         new Claim(ClaimTypes.Role, users.Role.ToString() ?? throw new InvalidOperationException())
                     }),
-                
+
                     Expires = DateTime.UtcNow.AddHours(2),
                     SigningCredentials =
                         new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
