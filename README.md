@@ -45,12 +45,13 @@ Siga as instruções abaixo para configurar e executar o projeto FinSharp em seu
 
  banco de dados**: Utilize o SQL Server Management Studio ou outra ferramenta de administração do SQL Server para criar um banco de dados vazio chamado "FinSharp".
 
-4. **Configurar a conexão com o banco de dados**: Abra o arquivo `appsettings.json` localizado na raiz do projeto e atualize as informações de conexão com o banco de dados, como o nome do servidor, nome do banco de dados, usuário e senha.
+4. **Configurar a conexão com o banco de dados**: Crie o arquivo  `appsettings.Development.json` na raiz do projeto e atualize as informações de conexão com o banco de dados, como o nome do servidor, nome do banco de dados, usuário e senha.
 
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Server=nome-do-servidor;Database=FinSharpDB;User Id=usuario;Password=senha;"
+       "DefaultConnection": "Server=nome-do-servidor;Database=FinSharpDB;User Id=usuario;Password=senha;",
+       "Secret":"sua hash" 
      },
      ...
    }
