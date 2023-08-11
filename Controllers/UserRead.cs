@@ -2,6 +2,7 @@ using FinSharp.data;
 using FinSharp.model;
 using FinSharp.schemas;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinSharp.Controllers
@@ -14,7 +15,7 @@ namespace FinSharp.Controllers
         [HttpGet]
         [Route("user/profile")]
         [Authorize]
-        public async Task<IActionResult> Get([FromServices] LocalDb db, [FromBody] LoginSchema user)
+        public Task<ActionResult<dynamic>> Get([FromServices] LocalDb db, [FromBody] LoginSchema user)
         {
             var newUser = new User();
             var filter = db.Users.Where(u => u.Name == user.Name && u.Password == newUser.EncryptingPassword(user.Password)).FirstOrDefault();
@@ -25,12 +26,12 @@ namespace FinSharp.Controllers
                 filter.Cpf = "";
                 filter.Password = "";
 
-                return Ok(filter);
+                return Task.FromResult<ActionResult<dynamic>>(Ok(filter));
 
             }
             else
             {
-                return BadRequest("access denied");
+                return Task.FromResult<ActionResult<dynamic>>(BadRequest("access denied"));
             }
         }
     }
