@@ -33,13 +33,13 @@ public class TokenServices
                         new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(config);
-                var tokenString = tokenHandler.WriteToken(token);
+                var tokenCreate = tokenHandler.CreateToken(config);
+                var token = tokenHandler.WriteToken(tokenCreate);
 
 
                 return new
                 {
-                    token = tokenString
+                    token
                 };
             }
         }

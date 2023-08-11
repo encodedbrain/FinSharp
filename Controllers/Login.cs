@@ -81,7 +81,7 @@ public class Login : ControllerBase
     [HttpPost]
     [Route("login/auth")]
     [AllowAnonymous]
-    public bool DecodeToken([FromHeader] string? token)
+    public bool DecodeToken([FromBody] string token)
     {
         var builder = WebApplication.CreateBuilder();
         var mySecret = builder.Configuration.GetConnectionString("Secret");
@@ -101,7 +101,7 @@ public class Login : ControllerBase
                     ValidIssuer = "Sample",
                     ValidAudience = "Sample",
                     IssuerSigningKey = mySecurityKey
-                }, out SecurityToken validatedToken);
+                }, out _);
             }
             catch
             {
