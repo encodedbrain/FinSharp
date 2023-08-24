@@ -8,7 +8,6 @@
 *.Development.json
 .idea/
 Migrations
-*encodedbrain
 
 # Build results
 
