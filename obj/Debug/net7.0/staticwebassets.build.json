@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "GWSfAozEwbxPYP9eHA/j+Ki0BE1Zn37In6C48J+pWB0=",
+  "Source": "LinkShortener-Backend",
+  "BasePath": "_content/LinkShortener-Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,7 +1,7 @@
-using FinSharp.model;
+using LinkShortener.model;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinSharp.data
+namespace LinkShortener.data
 {
     public class LocalDb : DbContext
     {

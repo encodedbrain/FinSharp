@@ -1,4 +1,4 @@
-﻿namespace FinSharp.schemas;
+﻿namespace LinkShortener.schemas;
 
 public class LoginWithEmailSchema
 {

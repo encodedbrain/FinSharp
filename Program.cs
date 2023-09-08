@@ -1,5 +1,5 @@
 using System.Text;
-using FinSharp.data;
+using LinkShortener.data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Logging;

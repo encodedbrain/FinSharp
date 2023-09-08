@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace FinSharp.model
+namespace LinkShortener.model
 {
     [Table("Users")]
     public class User

@@ -1,10 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using FinSharp.model;
+using LinkShortener.model;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FinSharp.services;
+namespace LinkShortener.services;
 
 public class TokenServices
 {
