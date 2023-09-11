@@ -1,25 +1,27 @@
 using LinkShortener.data;
 using LinkShortener.model;
-using LinkShortener.schemas;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkShortener.Controllers
 {
     [ApiController]
     [Route("v1")]
-
     public class UserRead : ControllerBase
     {
         [HttpGet]
         [Route("user/profile")]
         [Authorize]
-        public Task<ActionResult<dynamic>> Get([FromServices] LocalDb db, [FromBody] LoginSchema user)
+        public Task<ActionResult<dynamic>> Get(
+            [FromServices] LocalDb db,
+            [FromQuery] string Name,
+            string Password
+        )
         {
             var newUser = new User();
-            var filter = db.Users.Where(u => u.Name == user.Name && u.Password == newUser.EncryptingPassword(user.Password)).FirstOrDefault();
-
+            var filter = db.Users
+                .Where(u => u.Name == Name && u.Password == newUser.EncryptingPassword(Password))
+                .FirstOrDefault();
 
             if (filter != null)
             {
@@ -27,7 +29,6 @@ namespace LinkShortener.Controllers
                 filter.Password = "";
 
                 return Task.FromResult<ActionResult<dynamic>>(Ok(filter));
-
             }
             else
             {

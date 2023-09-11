@@ -13,7 +13,10 @@ namespace LinkShortener.Controllers
         [HttpPost]
         [Route("user/account/create")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Create([FromServices] LocalDb db, [FromBody] UserSchema user)
+        public async Task<ActionResult<dynamic>> Create(
+            [FromServices] LocalDb db,
+            [FromBody] UserSchema user
+        )
         {
             var enconded = new User().EncryptingPassword(user.Password);
 
@@ -44,7 +47,6 @@ namespace LinkShortener.Controllers
                 );
                 await db.Users.AddAsync(newUser);
                 await db.SaveChangesAsync();
-
 
                 newUser.Password = "";
                 newUser.Cpf = "";

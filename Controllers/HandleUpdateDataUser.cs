@@ -13,17 +13,29 @@ namespace LinkShortener.Controllers
         [HttpPatch]
         [Route("user/profile/account/update")]
         [Authorize]
-        public async Task<IActionResult> Update([FromServices] LocalDb db, [FromBody] UserUpdate user, [FromQuery] string option)
+        public async Task<IActionResult> Update(
+            [FromServices] LocalDb db,
+            [FromBody] UserUpdate user,
+            [FromQuery] string option
+        )
         {
-
             var newUser = new User();
 
-            var filter = db.Users.Where(u => u.Name == user.Name && u.Password == newUser.EncryptingPassword(user.Password)).FirstOrDefault();
+            var filter = db.Users
+                .Where(
+                    u =>
+                        u.Name == user.Name
+                        && u.Password == newUser.EncryptingPassword(user.Password)
+                )
+                .FirstOrDefault();
 
             if (filter != null)
             {
-
-                if (option.ToLower() == "name" && newUser.ValidateName(user.Name) && !string.IsNullOrEmpty(user.Name))
+                if (
+                    option.ToLower() == "name"
+                    && newUser.ValidateName(user.Name)
+                    && !string.IsNullOrEmpty(user.Name)
+                )
                 {
                     filter.Name = user.NewName;
                 }
@@ -45,8 +57,6 @@ namespace LinkShortener.Controllers
                 return Ok(filter);
             }
             return BadRequest("something wrong");
-
         }
-
     }
 }
