@@ -13,13 +13,9 @@ namespace LinkShortener.schemas
         }
 
         public string? Name { get; private set; }
-
         public int Age { get; private set; }
-
         public string? Email { get; private set; }
-
         public string? Password { get; internal set; }
-
         public string? Cpf { get; internal set; }
     }
 }

@@ -13,8 +13,6 @@ namespace LinkShortener.schemas
 
         public string? Name { get; set; }
         public string? Password { get; set; }
-
-
         public string? NewName { get; set; }
         public string? NewPassword { get; set; }
         public string? NewEmail { get; set; }
