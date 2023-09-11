@@ -9,6 +9,7 @@ namespace LinkShortener.data
         {
         }
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Url> Urls { get;set;}
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
